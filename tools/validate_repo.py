@@ -47,6 +47,9 @@ def main() -> int:
             continue
         manifest_path = directory / "manifest.kpkg"
         if not manifest_path.is_file():
+            if (directory / "package.meta").is_file() and (directory / "src" / "main.c").is_file():
+                warnings.append(f"{directory}: source-only package awaiting Ring-3 build")
+                continue
             errors.append(f"{directory}: missing manifest.kpkg")
             continue
         try:
@@ -147,7 +150,7 @@ def main() -> int:
             print(f"ERROR: {error}", file=sys.stderr)
         print(f"validation failed: {len(errors)} error(s)", file=sys.stderr)
         return 1
-    print(f"Anvil repository validation: PASS ({len(manifests)} package(s))")
+    print(f"Anvil repository validation: PASS ({len(manifests)} published package(s))")
     return 0
 
 
