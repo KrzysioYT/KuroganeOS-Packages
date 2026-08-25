@@ -2,7 +2,7 @@
 
 ## Package versions
 
-Anvil v1 treats `version` as an opaque display/storage string with a maximum of 19 characters. The official repository recommends SemVer-like versions:
+Anvil treats `version` as an opaque display/storage string with a maximum of 19 characters. The official repository recommends SemVer-like versions:
 
 ```text
 1.0.0
@@ -27,4 +27,14 @@ When the OS gains a new incompatible package format, introduce a new identifier 
 
 ## Updating existing packages
 
-Publishing a newer version to the repository does not currently upgrade an already-installed package. Anvil v1's installed database is name based. Full upgrade semantics belong to a future client/package format revision.
+Current KuroganeOS development Anvil records `name|version|destination` in `/home/anvil.db` and uses the **latest record for that package name** as its installed state.
+
+After a catalog refresh:
+
+- `GET` means the package is not installed;
+- `INST` means the installed version exactly matches the catalog;
+- `UPD` means the package exists locally but the catalog version is different.
+
+Selecting an `UPD` package and choosing **UPDATE SELECTED** downloads the new payload and uses the same transactional `.new` / `.old` replacement path as a first install. A successful update appends the new version to the installed database, making the newest record authoritative.
+
+Dependencies are still name-only. Installing a package automatically installs a missing dependency, but it does not currently express or enforce minimum/maximum dependency versions.
