@@ -1,5 +1,4 @@
 KIDX1
-pkg|hello-text|1.0.0|Example Anvil text payload|/packages/hello-text/manifest.kpkg
 pkg|kuro-apps|1.0.0|List executables installed in the system /apps directory|/packages/kuro-apps/manifest.kpkg
 pkg|kuro-audioinfo|1.0.0|Audio device, mixer and PCM format status|/packages/kuro-audioinfo/manifest.kpkg
 pkg|kuro-health|1.0.0|One-shot system, memory, network and audio health check|/packages/kuro-health/manifest.kpkg

@@ -1,0 +1,8 @@
+name=kuro-fscheck
+version=1.0.0
+description=Filesystem roots and /apps integrity overview
+destination=/apps/kuro-fscheck
+depends=
+peer=
+conflicts=
+license=KSAL-2.0

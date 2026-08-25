@@ -1,0 +1,8 @@
+name=kuro-audiotest
+version=1.0.0
+description=Short PCM playback and mixer functionality test
+destination=/apps/kuro-audiotest
+depends=
+peer=
+conflicts=
+license=KSAL-2.0
