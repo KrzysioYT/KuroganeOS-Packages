@@ -1,11 +1,11 @@
 KPKG1
 name=kuro-toolkit
-version=1.0.0
-description=Install the core KuroganeOS diagnostic utility set
+version=1.1.0
+description=Install the complete KuroganeOS utility and diagnostic set
 destination=/apps/kuro-toolkit
 payload=/packages/kuro-toolkit/payload/kuro-toolkit
-bytes=9008
-depends=kurofetch,kuro-netinfo,kuro-uptime,kuro-meminfo,kuro-webcheck,kuro-audioinfo,kuro-apps
+bytes=9096
+depends=kurofetch,kuro-netinfo,kuro-uptime,kuro-meminfo,kuro-webcheck,kuro-diagnostics
 peer=
 conflicts=
 license=KSAL-2.0

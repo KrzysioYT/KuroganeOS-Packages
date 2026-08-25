@@ -1,0 +1,11 @@
+KPKG1
+name=kuro-diagnostics
+version=1.0.0
+description=Extended filesystem, audio and health diagnostic set
+destination=/apps/kuro-diagnostics
+payload=/packages/kuro-diagnostics/payload/kuro-diagnostics
+bytes=8952
+depends=kuro-health,kuro-fscheck,kuro-audiotest,kuro-audioinfo,kuro-apps
+peer=
+conflicts=
+license=KSAL-2.0
