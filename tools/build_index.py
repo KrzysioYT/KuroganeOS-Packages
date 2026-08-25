@@ -9,6 +9,15 @@ ROOT = Path(__file__).resolve().parents[1]
 PACKAGES = ROOT / "packages"
 INDEX = ROOT / "index.kuro"
 
+# The catalog order is also Anvil's initial UI order. Put the one-click meta
+# package first, then the most useful overview tools, while keeping the rest
+# deterministic by name.
+PRIORITY = {
+    "kuro-toolkit": 0,
+    "kurofetch": 1,
+    "kuro-diagnostics": 2,
+}
+
 
 def parse_manifest(path: Path) -> dict[str, str]:
     lines = path.read_text(encoding="utf-8").splitlines()
@@ -24,9 +33,17 @@ def parse_manifest(path: Path) -> dict[str, str]:
     return result
 
 
+def package_order(directory: Path) -> tuple[int, str]:
+    return (PRIORITY.get(directory.name, 100), directory.name)
+
+
 def generated() -> str:
     records: list[str] = ["KIDX1"]
-    for directory in sorted(PACKAGES.iterdir() if PACKAGES.exists() else []):
+    directories = sorted(
+        PACKAGES.iterdir() if PACKAGES.exists() else [],
+        key=package_order,
+    )
+    for directory in directories:
         if not directory.is_dir() or directory.name.startswith("_"):
             continue
         manifest = directory / "manifest.kpkg"
