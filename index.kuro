@@ -1,13 +1,13 @@
 KIDX1
+pkg|kuro-toolkit|1.1.0|Install the complete KuroganeOS utility and diagnostic set|/packages/kuro-toolkit/manifest.kpkg
+pkg|kurofetch|1.0.0|Compact KuroganeOS system and network overview|/packages/kurofetch/manifest.kpkg
+pkg|kuro-diagnostics|1.0.0|Extended filesystem, audio and health diagnostic set|/packages/kuro-diagnostics/manifest.kpkg
 pkg|kuro-apps|1.0.0|List executables installed in the system /apps directory|/packages/kuro-apps/manifest.kpkg
 pkg|kuro-audioinfo|1.0.0|Audio device, mixer and PCM format status|/packages/kuro-audioinfo/manifest.kpkg
 pkg|kuro-audiotest|1.0.0|Short PCM playback and mixer functionality test|/packages/kuro-audiotest/manifest.kpkg
-pkg|kuro-diagnostics|1.0.0|Extended filesystem, audio and health diagnostic set|/packages/kuro-diagnostics/manifest.kpkg
 pkg|kuro-fscheck|1.0.0|Filesystem roots and /apps integrity overview|/packages/kuro-fscheck/manifest.kpkg
 pkg|kuro-health|1.0.0|One-shot system, memory, network and audio health check|/packages/kuro-health/manifest.kpkg
 pkg|kuro-meminfo|1.0.0|Memory usage, free memory and pressure summary|/packages/kuro-meminfo/manifest.kpkg
 pkg|kuro-netinfo|1.0.0|Network interface, DHCP and traffic diagnostics|/packages/kuro-netinfo/manifest.kpkg
-pkg|kuro-toolkit|1.1.0|Install the complete KuroganeOS utility and diagnostic set|/packages/kuro-toolkit/manifest.kpkg
 pkg|kuro-uptime|1.0.0|Monotonic uptime and current scheduler load summary|/packages/kuro-uptime/manifest.kpkg
 pkg|kuro-webcheck|1.0.0|Real HTTPS and TLS connectivity self-test|/packages/kuro-webcheck/manifest.kpkg
-pkg|kurofetch|1.0.0|Compact KuroganeOS system and network overview|/packages/kurofetch/manifest.kpkg
