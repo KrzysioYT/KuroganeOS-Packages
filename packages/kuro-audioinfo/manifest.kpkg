@@ -1,0 +1,11 @@
+KPKG1
+name=kuro-audioinfo
+version=1.0.0
+description=Audio device, mixer and PCM format status
+destination=/apps/kuro-audioinfo
+payload=/packages/kuro-audioinfo/payload/kuro-audioinfo
+bytes=9336
+depends=
+peer=
+conflicts=
+license=KSAL-2.0

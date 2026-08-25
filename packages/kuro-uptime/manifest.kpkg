@@ -1,0 +1,11 @@
+KPKG1
+name=kuro-uptime
+version=1.0.0
+description=Monotonic uptime and current scheduler load summary
+destination=/apps/kuro-uptime
+payload=/packages/kuro-uptime/payload/kuro-uptime
+bytes=9360
+depends=
+peer=
+conflicts=
+license=KSAL-2.0

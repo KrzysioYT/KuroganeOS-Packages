@@ -1,0 +1,11 @@
+KPKG1
+name=kuro-health
+version=1.0.0
+description=One-shot system, memory, network and audio health check
+destination=/apps/kuro-health
+payload=/packages/kuro-health/payload/kuro-health
+bytes=9400
+depends=
+peer=
+conflicts=
+license=KSAL-2.0

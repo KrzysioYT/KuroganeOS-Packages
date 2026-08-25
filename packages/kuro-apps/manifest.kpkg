@@ -1,0 +1,11 @@
+KPKG1
+name=kuro-apps
+version=1.0.0
+description=List executables installed in the system /apps directory
+destination=/apps/kuro-apps
+payload=/packages/kuro-apps/payload/kuro-apps
+bytes=9304
+depends=
+peer=
+conflicts=
+license=KSAL-2.0

@@ -1,0 +1,11 @@
+KPKG1
+name=kuro-meminfo
+version=1.0.0
+description=Memory usage, free memory and pressure summary
+destination=/apps/kuro-meminfo
+payload=/packages/kuro-meminfo/payload/kuro-meminfo
+bytes=9432
+depends=
+peer=
+conflicts=
+license=KSAL-2.0

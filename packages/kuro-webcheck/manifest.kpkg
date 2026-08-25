@@ -1,0 +1,11 @@
+KPKG1
+name=kuro-webcheck
+version=1.0.0
+description=Real HTTPS and TLS connectivity self-test
+destination=/apps/kuro-webcheck
+payload=/packages/kuro-webcheck/payload/kuro-webcheck
+bytes=9512
+depends=
+peer=
+conflicts=
+license=KSAL-2.0
