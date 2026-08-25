@@ -1,0 +1,11 @@
+KPKG1
+name=kuro-audiotest
+version=1.0.0
+description=Short PCM playback and mixer functionality test
+destination=/apps/kuro-audiotest
+payload=/packages/kuro-audiotest/payload/kuro-audiotest
+bytes=9560
+depends=
+peer=
+conflicts=
+license=KSAL-2.0

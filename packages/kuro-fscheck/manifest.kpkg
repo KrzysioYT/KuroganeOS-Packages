@@ -1,0 +1,11 @@
+KPKG1
+name=kuro-fscheck
+version=1.0.0
+description=Filesystem roots and /apps integrity overview
+destination=/apps/kuro-fscheck
+payload=/packages/kuro-fscheck/payload/kuro-fscheck
+bytes=9488
+depends=
+peer=
+conflicts=
+license=KSAL-2.0
