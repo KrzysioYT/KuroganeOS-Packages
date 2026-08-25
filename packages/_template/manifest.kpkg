@@ -1,0 +1,11 @@
+KPKG1
+name=replace-me
+version=0.1.0
+description=Replace this description
+destination=/home/replace-me
+payload=/packages/replace-me/payload/replace-me
+bytes=REPLACE_WITH_EXACT_PAYLOAD_SIZE
+depends=
+peer=
+conflicts=
+license=REPLACE_ME
