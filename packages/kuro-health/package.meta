@@ -1,0 +1,8 @@
+name=kuro-health
+version=1.0.0
+description=One-shot system, memory, network and audio health check
+destination=/apps/kuro-health
+depends=
+peer=
+conflicts=
+license=KSAL-2.0

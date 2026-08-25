@@ -1,0 +1,8 @@
+name=kuro-apps
+version=1.0.0
+description=List executables installed in the system /apps directory
+destination=/apps/kuro-apps
+depends=
+peer=
+conflicts=
+license=KSAL-2.0

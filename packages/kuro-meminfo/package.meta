@@ -1,0 +1,8 @@
+name=kuro-meminfo
+version=1.0.0
+description=Memory usage, free memory and pressure summary
+destination=/apps/kuro-meminfo
+depends=
+peer=
+conflicts=
+license=KSAL-2.0

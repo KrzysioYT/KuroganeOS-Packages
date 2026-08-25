@@ -1,0 +1,52 @@
+name: Build KuroganeOS Ring-3 packages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'packages/**/src/**'
+      - 'packages/**/package.meta'
+      - 'packages/_common/**'
+      - 'tools/build_ring3_packages.sh'
+      - '.github/workflows/build-packages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: anvil-ring3-builder
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout package repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential binutils git python3
+
+      - name: Build KuroganeOS Ring-3 payloads
+        env:
+          KUROGANE_OS_REF: gpt/kuroganeos-5-gui
+        run: |
+          chmod +x tools/build_ring3_packages.sh
+          ./tools/build_ring3_packages.sh
+
+      - name: Publish generated payloads and manifests
+        run: |
+          if git diff --quiet -- packages index.kuro; then
+            echo 'Generated payloads are already current.'
+            exit 0
+          fi
+          git config user.name 'KuroganeOS Package Builder'
+          git config user.email 'actions@users.noreply.github.com'
+          git add packages index.kuro
+          git commit -m 'build: publish Ring-3 package payloads'
+          git push origin HEAD:main

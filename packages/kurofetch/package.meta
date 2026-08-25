@@ -1,0 +1,8 @@
+name=kurofetch
+version=1.0.0
+description=Compact KuroganeOS system and network overview
+destination=/apps/kurofetch
+depends=
+peer=
+conflicts=
+license=KSAL-2.0

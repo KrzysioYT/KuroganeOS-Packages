@@ -1,71 +1,45 @@
 # KuroganeOS Packages
 
-Official package repository and reference implementation for **Anvil**, the KuroganeOS package manager.
+Official **Anvil** package repository for KuroganeOS.
 
-This repository is intentionally separate from the KuroganeOS kernel/source tree. Anvil downloads the catalog, package manifests and payloads over HTTPS from this repository.
-
-## Current compatibility
-
-The repository targets the current Anvil v1 wire formats:
-
-- catalog: `KIDX1`
-- package manifest: `KPKG1`
-- default host: `raw.githubusercontent.com`
-- default base: `/KrzysioYT/KuroganeOS-Packages/main`
-
-The formats are deliberately small and deterministic. Current Anvil installs **one payload file per package**, resolves name-only dependencies recursively, verifies exact payload byte count and performs a `.new` / `.old` transactional replacement.
-
-## Start here
-
-- [Using Anvil](docs/USING_ANVIL.md)
-- [Pointing KuroganeOS at another repository](docs/ADDING_REPOSITORY.md)
-- [Creating your own Anvil repository](docs/CREATING_REPOSITORY.md)
-- [Creating a package](docs/CREATING_PACKAGE.md)
-- [KIDX1 repository format](docs/REPOSITORY_FORMAT.md)
-- [KPKG1 package format](docs/PACKAGE_FORMAT.md)
-- [Dependencies, peers and conflicts](docs/DEPENDENCIES.md)
-- [Publishing and validation](docs/PUBLISHING.md)
-- [Current limitations and roadmap](docs/ROADMAP.md)
-
-## Repository layout
+Anvil consumes this repository directly over HTTPS from:
 
 ```text
-index.kuro
-packages/
-  hello-text/
-    manifest.kpkg
-    payload/
-      hello.txt
-  _template/
-    manifest.kpkg
-examples/
-  anvil.cfg
-tools/
-  build_index.py
-  validate_repo.py
-docs/
-.github/workflows/
+raw.githubusercontent.com/KrzysioYT/KuroganeOS-Packages/main
 ```
 
-## Validate locally
+## Installing packages
 
-```bash
-python3 tools/validate_repo.py
-python3 tools/build_index.py --check
+Normal users do **not** build packages manually.
+
+Open **Anvil** inside KuroganeOS, select a package and choose **INSTALL SELECTED**. Anvil downloads the manifest/payload, resolves dependencies and installs transactionally.
+
+For the standard utility set install only:
+
+```text
+kuro-toolkit
 ```
 
-To regenerate the root catalog from package manifests:
+It pulls the core tools automatically.
 
-```bash
-python3 tools/build_index.py --write
-```
+## Current utility family
 
-Every pull request is validated by GitHub Actions.
+- `kurofetch` — compact system/network overview;
+- `kuro-netinfo` — NIC, DHCP, addressing and traffic;
+- `kuro-uptime` — uptime and scheduler load;
+- `kuro-meminfo` — total/used/free memory;
+- `kuro-webcheck` — real HTTPS/TLS connectivity test;
+- `kuro-audioinfo` — audio/mixer status;
+- `kuro-apps` — list `/apps` entries;
+- `kuro-health` — one-shot health summary;
+- `kuro-toolkit` — dependency meta-package installing the core set.
 
-## Important security note
+## Repository automation
 
-Anvil currently trusts the configured HTTPS repository and validates transport success plus payload byte count. **Package signing and payload hashes are not implemented yet.** Do not treat third-party repositories as cryptographically authenticated package sources. See [SECURITY.md](SECURITY.md).
+Official Ring-3 packages are built from source by GitHub Actions. CI generates the ELF payloads, `manifest.kpkg`, exact `bytes=` values and `index.kuro`. See [docs/AUTOMATED_PACKAGES.md](docs/AUTOMATED_PACKAGES.md).
 
-## KuroganeOS
+## Documentation
 
-Main operating-system repository: `KrzysioYT/KuroganeOS`.
+Start with [docs/START_HERE.md](docs/START_HERE.md). The docs include using Anvil, adding another repository, creating repositories/packages, `KIDX1`/`KPKG1`, dependencies, versioning, publishing, security, troubleshooting and maintainer workflows.
+
+The package protocol is intentionally kept compatible with the current KuroganeOS Anvil client. Format evolution must be coordinated with the OS repository.

@@ -1,0 +1,8 @@
+name=kuro-toolkit
+version=1.0.0
+description=Install the core KuroganeOS diagnostic utility set
+destination=/apps/kuro-toolkit
+depends=kurofetch,kuro-netinfo,kuro-uptime,kuro-meminfo,kuro-webcheck,kuro-audioinfo,kuro-apps
+peer=
+conflicts=
+license=KSAL-2.0

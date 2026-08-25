@@ -1,0 +1,8 @@
+name=kuro-netinfo
+version=1.0.0
+description=Network interface, DHCP and traffic diagnostics
+destination=/apps/kuro-netinfo
+depends=
+peer=
+conflicts=
+license=KSAL-2.0
