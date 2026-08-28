@@ -2,6 +2,7 @@
 """Validate a KuroganeOS Anvil KIDX1/KPKG1 repository."""
 from __future__ import annotations
 
+import hashlib
 import re
 import sys
 from pathlib import Path
@@ -13,6 +14,7 @@ MAX_PACKAGES = 12
 HTTP_CAP = 512 * 1024
 WARN_PAYLOAD = 500 * 1024
 NAME_RE = re.compile(r"^[a-z0-9][a-z0-9._-]{0,30}$")
+SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 
 
 def parse_manifest(path: Path) -> dict[str, str]:
@@ -37,6 +39,14 @@ def split_names(value: str) -> list[str]:
     return [x.strip() for x in value.split(",") if x.strip()]
 
 
+def sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as stream:
+        for chunk in iter(lambda: stream.read(128 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
 def main() -> int:
     errors: list[str] = []
     warnings: list[str] = []
@@ -58,7 +68,7 @@ def main() -> int:
             errors.append(str(exc))
             continue
 
-        for key in ("name", "version", "destination", "payload", "bytes"):
+        for key in ("name", "version", "destination", "payload", "bytes", "sha256"):
             if not data.get(key):
                 errors.append(f"{manifest_path}: missing required field {key}")
 
@@ -77,6 +87,9 @@ def main() -> int:
             errors.append(f"{manifest_path}: destination must be absolute and <=127 chars")
         if len(data.get("payload", "")) > 111 or not data.get("payload", "").startswith("/"):
             errors.append(f"{manifest_path}: payload must start with / and be <=111 chars")
+        declared_sha256 = data.get("sha256", "")
+        if declared_sha256 and not SHA256_RE.fullmatch(declared_sha256):
+            errors.append(f"{manifest_path}: sha256 must be exactly 64 lowercase hexadecimal characters")
         for key in ("depends", "peer", "conflicts"):
             if len(data.get(key, "")) > 95:
                 errors.append(f"{manifest_path}: {key} exceeds 95 chars")
@@ -95,6 +108,12 @@ def main() -> int:
                 errors.append(f"{manifest_path}: bytes must be a decimal integer")
             if declared != actual:
                 errors.append(f"{manifest_path}: bytes={declared}, actual payload size={actual}")
+            if declared_sha256 and SHA256_RE.fullmatch(declared_sha256):
+                actual_sha256 = sha256_file(payload_path)
+                if declared_sha256 != actual_sha256:
+                    errors.append(
+                        f"{manifest_path}: sha256={declared_sha256}, actual payload sha256={actual_sha256}"
+                    )
             if actual >= HTTP_CAP:
                 errors.append(f"{manifest_path}: payload {actual} bytes reaches/exceeds 512 KiB transport capacity")
             elif actual > WARN_PAYLOAD:
