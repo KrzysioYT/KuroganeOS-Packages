@@ -21,9 +21,9 @@ Anvil refreshes `/index.kuro` over HTTPS and presents the packages in its own sy
 4. select the package;
 5. choose **INSTALL SELECTED**.
 
-The package is downloaded and installed entirely by KuroganeOS.
+The package is downloaded, integrity-checked and installed entirely by KuroganeOS.
 
-For the standard utility set, install `kuro-toolkit`. Its `depends=` list makes Anvil install the core tools automatically.
+For the standard utility set, install `kuro-toolkit`. Its dependency graph makes Anvil install the core tools automatically.
 
 ## Package state
 
@@ -35,7 +35,7 @@ INST  installed version matches the repository
 UPD   repository contains a different version
 ```
 
-For `UPD`, choose **UPDATE SELECTED**. Updates use the same transactional replacement path as installation.
+For `UPD`, choose **UPDATE SELECTED**. To refresh every stale package in the catalog, choose **UPDATE ALL** or press `U`. Updates use the same transactional replacement path as installation.
 
 ## What Anvil does internally
 
@@ -44,18 +44,21 @@ For `UPD`, choose **UPDATE SELECTED**. Updates use the same transactional replac
 3. verify index name/version match the manifest;
 4. read the latest installed version from `/home/anvil.db`;
 5. reject conflicts and verify peers;
-6. recursively install missing normal dependencies;
+6. recursively install or refresh stale normal dependencies;
 7. download the payload over HTTPS;
 8. require the response body length to match `bytes=` exactly;
-9. write `<destination>.new`;
-10. move an existing destination to `<destination>.old`;
-11. rename `.new` into the final destination;
-12. remove the backup after success;
-13. append `name|version|destination` to `/home/anvil.db`.
+9. recompute SHA-256 and require it to match `sha256=`;
+10. write `<destination>.new`;
+11. move an existing destination to `<destination>.old`;
+12. rename `.new` into the final destination;
+13. remove the backup after success;
+14. append `name|version|destination` to `/home/anvil.db`.
+
+A failed size/hash check stops before the destination transaction. SHA-256 validates payload integrity relative to the manifest; it is not an independent package signature.
 
 ## Running installed tools
 
-Official command-line packages install under `/apps`. On the current KuroganeOS development branch Kurosh resolves installed `/apps` programs as commands, so after installing `kurofetch` you can run:
+Official command-line packages install under `/apps`. Kurosh resolves installed `/apps` programs as commands, so after installing `kurofetch` you can run:
 
 ```text
 kurofetch
@@ -69,6 +72,6 @@ run kurofetch
 
 ## Current limits
 
-The current catalog supports at most **12 packages** in one repository view. Dependency recursion is bounded to **6 levels**. Packages are currently single-payload transactions and cryptographic package signatures are still future work.
+The current catalog supports at most **12 packages** in one repository view. Dependency recursion is bounded to **6 levels**. Packages are currently single-payload transactions and independent cryptographic package signatures are still future work.
 
 See `docs/ROADMAP.md` for planned evolution.
