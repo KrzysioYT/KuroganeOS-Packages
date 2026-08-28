@@ -5,6 +5,7 @@ description=Monotonic uptime and current scheduler load summary
 destination=/apps/kuro-uptime
 payload=/packages/kuro-uptime/payload/kuro-uptime
 bytes=9360
+sha256=31022ef601b3bcd2fee052ef0c856141a3e7b048dd7f1bb940558d66af12e033
 depends=
 peer=
 conflicts=

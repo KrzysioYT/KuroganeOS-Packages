@@ -5,6 +5,7 @@ description=Audio device, mixer and PCM format status
 destination=/apps/kuro-audioinfo
 payload=/packages/kuro-audioinfo/payload/kuro-audioinfo
 bytes=9336
+sha256=ded444cd66bf555678604b69101818324b34fe4346847fe08d1f8696b163337e
 depends=
 peer=
 conflicts=

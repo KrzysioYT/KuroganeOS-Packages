@@ -5,6 +5,7 @@ description=Filesystem roots and /apps integrity overview
 destination=/apps/kuro-fscheck
 payload=/packages/kuro-fscheck/payload/kuro-fscheck
 bytes=9488
+sha256=77ff25a89b0ec024574eb58ff2de51b889241a446fd7539dae0469f6b2fa7545
 depends=
 peer=
 conflicts=

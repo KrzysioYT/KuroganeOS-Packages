@@ -5,6 +5,7 @@ description=List executables installed in the system /apps directory
 destination=/apps/kuro-apps
 payload=/packages/kuro-apps/payload/kuro-apps
 bytes=9304
+sha256=b71fd57117adcc00ed635d2f0c9728158e3ec70049e32dff09f3b49900647806
 depends=
 peer=
 conflicts=

@@ -5,6 +5,7 @@ description=Short PCM playback and mixer functionality test
 destination=/apps/kuro-audiotest
 payload=/packages/kuro-audiotest/payload/kuro-audiotest
 bytes=9560
+sha256=cff5178c98cc1ee1f6df848222012ab071b2e6aee64c7d443926645d02df60e4
 depends=
 peer=
 conflicts=

@@ -5,6 +5,7 @@ description=One-shot system, memory, network and audio health check
 destination=/apps/kuro-health
 payload=/packages/kuro-health/payload/kuro-health
 bytes=9400
+sha256=4d4020cc82176a8cb5408a37addcb3888277cc491a4ade66505cb9af3096a9ac
 depends=
 peer=
 conflicts=

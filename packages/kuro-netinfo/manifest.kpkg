@@ -5,6 +5,7 @@ description=Network interface, DHCP and traffic diagnostics
 destination=/apps/kuro-netinfo
 payload=/packages/kuro-netinfo/payload/kuro-netinfo
 bytes=9560
+sha256=efbe69fddf945cd37ec34e33e6ed4e4e454ea5605d6749646e28c062216d46fa
 depends=
 peer=
 conflicts=

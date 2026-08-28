@@ -5,6 +5,7 @@ description=Memory usage, free memory and pressure summary
 destination=/apps/kuro-meminfo
 payload=/packages/kuro-meminfo/payload/kuro-meminfo
 bytes=9432
+sha256=9579b1d0f7cbf4e3a72af722c605a5efea63b35dd5a7aa15313702afd91be15b
 depends=
 peer=
 conflicts=

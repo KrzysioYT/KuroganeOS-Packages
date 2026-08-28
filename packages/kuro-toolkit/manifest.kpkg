@@ -5,6 +5,7 @@ description=Install the complete KuroganeOS utility and diagnostic set
 destination=/apps/kuro-toolkit
 payload=/packages/kuro-toolkit/payload/kuro-toolkit
 bytes=9096
+sha256=057ceb47eb21a66e617366f558aea2ea95beab3c2eab8b0c1f756303648b2ce2
 depends=kurofetch,kuro-netinfo,kuro-uptime,kuro-meminfo,kuro-webcheck,kuro-diagnostics
 peer=
 conflicts=

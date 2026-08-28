@@ -5,6 +5,7 @@ description=Extended filesystem, audio and health diagnostic set
 destination=/apps/kuro-diagnostics
 payload=/packages/kuro-diagnostics/payload/kuro-diagnostics
 bytes=8952
+sha256=36e6f4692bb6d651d335e6122386b37b7d38aaae7eb3a704bc300872d25a3ee2
 depends=kuro-health,kuro-fscheck,kuro-audiotest,kuro-audioinfo,kuro-apps
 peer=
 conflicts=

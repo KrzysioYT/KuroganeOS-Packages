@@ -5,6 +5,7 @@ description=Real HTTPS and TLS connectivity self-test
 destination=/apps/kuro-webcheck
 payload=/packages/kuro-webcheck/payload/kuro-webcheck
 bytes=9512
+sha256=19e9265440d1887cb9a850d0688726587a4ae3e811c9a274723d0535d47d60ab
 depends=
 peer=
 conflicts=
