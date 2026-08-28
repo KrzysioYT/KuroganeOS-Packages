@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import re
 import shutil
 import subprocess
@@ -11,6 +12,14 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 NAME_RE = re.compile(r"^[a-z0-9][a-z0-9._-]{0,30}$")
+
+
+def sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as stream:
+        for chunk in iter(lambda: stream.read(128 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
 
 
 def main() -> int:
@@ -52,6 +61,7 @@ def main() -> int:
         shutil.rmtree(package_dir)
         parser.error("generated payload request path exceeds current 111-character manifest capacity")
 
+    payload_sha256 = sha256_file(destination_file)
     manifest = package_dir / "manifest.kpkg"
     manifest.write_text(
         "\n".join([
@@ -62,6 +72,7 @@ def main() -> int:
             f"destination={args.destination}",
             f"payload={request_path}",
             f"bytes={destination_file.stat().st_size}",
+            f"sha256={payload_sha256}",
             f"depends={args.depends}",
             f"peer={args.peer}",
             f"conflicts={args.conflicts}",
@@ -74,6 +85,7 @@ def main() -> int:
     (package_dir / "README.md").write_text(
         f"# {args.name}\n\n{args.description}\n\n"
         f"Installs `{args.destination}`.\n\n"
+        f"Payload SHA-256: `{payload_sha256}`.\n\n"
         "Document source, provenance, license and KuroganeOS testing here.\n",
         encoding="utf-8",
         newline="\n",
