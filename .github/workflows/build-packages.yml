@@ -40,13 +40,27 @@ jobs:
           ./tools/build_ring3_packages.sh
 
       - name: Publish generated payloads and manifests
+        env:
+          KUROGANE_OS_REF: gpt/kuroganeos-5-gui
         run: |
+          git config user.name 'KuroganeOS Package Builder'
+          git config user.email 'actions@users.noreply.github.com'
+
+          # A source/tooling commit may land while the builder is compiling the
+          # SDK. Never push generated output based on a stale package tree.
+          git fetch origin main
+          if [ "$(git rev-parse origin/main)" != "$(git rev-parse HEAD)" ]; then
+            echo 'main advanced during package build; rebuilding on the latest tree.'
+            git reset --hard origin/main
+            chmod +x tools/build_ring3_packages.sh
+            ./tools/build_ring3_packages.sh
+          fi
+
           if git diff --quiet -- packages index.kuro; then
             echo 'Generated payloads are already current.'
             exit 0
           fi
-          git config user.name 'KuroganeOS Package Builder'
-          git config user.email 'actions@users.noreply.github.com'
+
           git add packages index.kuro
           git commit -m 'build: publish Ring-3 package payloads'
           git push origin HEAD:main
