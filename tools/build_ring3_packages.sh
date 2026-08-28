@@ -20,7 +20,7 @@ include="$sysroot/usr/include"
 cc="${CC:-gcc}"
 readelf="${READELF:-readelf}"
 
-for tool in "$cc" "$readelf"; do
+for tool in "$cc" "$readelf" sha256sum; do
   command -v "$tool" >/dev/null 2>&1 || { echo "missing build tool: $tool" >&2; exit 1; }
 done
 
@@ -76,6 +76,8 @@ for dir in "$root"/packages/*; do
   fi
 
   bytes="$(wc -c < "$elf" | tr -d ' ')"
+  sha256="$(sha256sum "$elf" | awk '{print $1}')"
+  [[ "$sha256" =~ ^[0-9a-f]{64}$ ]] || { echo "$name: invalid SHA-256 result" >&2; exit 1; }
   cat > "$dir/manifest.kpkg" <<EOF
 KPKG1
 name=$name
@@ -84,12 +86,13 @@ description=$description
 destination=$destination
 payload=/packages/$name/payload/$name
 bytes=$bytes
+sha256=$sha256
 depends=$depends
 peer=$peer
 conflicts=$conflicts
 license=$license
 EOF
-  echo "[package] $name $version -> $destination ($bytes bytes)"
+  echo "[package] $name $version -> $destination ($bytes bytes, sha256=$sha256)"
   built=$((built + 1))
 done
 
